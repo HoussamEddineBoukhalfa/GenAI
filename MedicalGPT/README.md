@@ -1,4 +1,4 @@
-# Medical_LLM Using GEMINI
+# MedicalGPT Using GEMINI
 ## Overview
 MedicalGPT is an advanced language model for medical applications, leveraging the powerful capabilities of GEMINI. This project aims to improve healthcare outcomes by providing more accurate and efficient medical language processing for diagnostics, treatment recommendations, and patient care.
 
