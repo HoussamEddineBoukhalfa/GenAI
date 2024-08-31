@@ -1,6 +1,6 @@
-# MedicalGPT Using GEMINI
+# ArabMedicalGPT
 ## Overview
-MedicalGPT is an advanced language model for medical applications, leveraging the powerful capabilities of GEMINI. This project aims to improve healthcare outcomes by providing more accurate and efficient medical language processing for diagnostics, treatment recommendations, and patient care.
+ArabMedicalGPT is an arabic advanced language model for medical applications, leveraging the powerful capabilities of GEMINI. This project aims to improve healthcare outcomes by providing more accurate and efficient medical language processing for diagnostics, treatment recommendations, and patient care.
 
 ## Features
 - **Medical Language Understanding**: Enhanced comprehension of medical terminology.
@@ -13,3 +13,5 @@ MedicalGPT is an advanced language model for medical applications, leveraging th
 - LangChain
 - GEMINI
 - Pinecone
+- Django
+- React
