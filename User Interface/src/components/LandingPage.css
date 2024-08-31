@@ -1,0 +1,115 @@
+/* src/components/LandingPage.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 50px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    margin-top: 5px;
+    height: 120px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.navigation a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.cta-button {
+    margin-left: 20px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align the text content and robot image to the same vertical level */
+    flex: 1;
+    padding-top: 20px; /* Space between nav bar and content */
+    position: relative;
+}
+
+.text-content {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the text content vertically */
+}
+
+.text-content h1 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 1.2rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.cta-form {
+    display: flex;
+    align-items: center;
+}
+
+.cta-form input {
+    padding: 15px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.cta-form button {
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.image-content {
+    max-width: 40%; /* Adjust size as needed */
+    text-align: right;
+    margin-left: auto;
+}
+
+.robot-image {
+    width: 100%;
+    height: auto;
+}

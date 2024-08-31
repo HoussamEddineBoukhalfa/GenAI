@@ -1,0 +1,219 @@
+:root {
+    --background-color-light: #ffffff;
+    --background-color-dark: #1e1e1e;
+    --text-color-light: #333333;
+    --text-color-dark: #f4f4f4; /* Light color for dark mode text */
+    --bubble-color-light: #e0e0e0;
+    --bubble-color-dark: #333333; /* Darker bubble color for dark mode */
+    --user-message-light: #28a745;
+    --user-message-dark: #4caf50;
+}
+  
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color-light); /* Light mode background */
+    direction: rtl; /* Right-to-left text direction for the entire page */
+}
+  
+.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+  
+.light-mode {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+  
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+  
+.chat-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+  
+.theme-toggle img {
+    width: 24px;
+    height: 24px;
+}
+  
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the discussion */
+}
+  
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    text-align: right;
+    width: 60%; /* Restrict the width to make it look centered */
+}
+  
+.user-message {
+    justify-content: flex-end;
+}
+  
+.bot-message {
+    justify-content: flex-start;
+}
+  
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+  
+.chat-bubble {
+    max-width: 100%; /* Full width within the chat-message container */
+    padding: 5px 25px;
+    border-radius: 27px;
+    background-color: var(--bubble-color-light);
+    color: var(--text-color-light);
+}
+  
+.user-message .chat-bubble {
+    background-color: var(--bubble-color-light);
+    color: var(--text-color-light);
+}
+  
+.bot-message .chat-bubble {
+    background-color: var(--background-color-light);
+}
+  
+.dark-mode .chat-bubble {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark); /* Ensure the text color is light in dark mode */
+}
+  
+.dark-mode .user-message .chat-bubble {
+    background-color: var(--bubble-color-dark);
+    color: var(--text-color-dark);
+}
+  
+.chat-form {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center;
+    padding: 7px 0px;
+    background-color: transparent;
+    position: relative;
+    width: 60%; /* Match width to input */
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+.dark-mode .chat-form {
+    background-color: var(--background-color-dark);
+}
+  
+.chat-input {
+    width: 100%; /* Full width to accommodate the button inside */
+    padding: 10px 15px 10px 50px; /* Add left padding to make space for the button */
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem; /* Slightly smaller font size */
+    background-color: var(--bubble-color-light);
+    color: var(--text-color-light);
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+}
+  
+.dark-mode .chat-input {
+    background-color: var(--bubble-color-dark);
+    color: var(--text-color-dark);
+}
+  
+.chat-input:focus {
+    border-color: var(--user-message-light);
+    outline: none;
+}
+  
+.dark-mode .chat-input:focus {
+    border-color: var(--user-message-dark);
+}
+  
+.chat-submit {
+    position: absolute;
+    left: 10px; /* Position it inside the input on the left */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Smaller width for the submit button */
+    height: 30px; /* Smaller height for the submit button */
+    background-color: var(--user-message-light);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+  
+.dark-mode .chat-submit {
+    background-color: var(--user-message-dark);
+}
+  
+.chat-submit:hover {
+    transform: scale(1.1);
+    background-color: #218838;
+}
+  
+.dark-mode .chat-submit:hover {
+    background-color: #1b7a31;
+}
+  
+.chat-submit i {
+    font-size: 14px; /* Smaller icon size */
+}
+
+
+.chat-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Adjust margin if needed */
+}
+
+.logo-image {
+    margin-top: 2px;
+    height: 100px;
+}
