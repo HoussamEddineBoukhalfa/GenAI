@@ -6,9 +6,14 @@ from rest_framework.response import Response
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
 import pinecone
+from pinecone import Pinecone, ServerlessSpec
 import pickle
 import google.generativeai as genai
 from os import path
+import mtranslate as mt
+from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from django.http import JsonResponse
 
 
 def download_hugging_face_embeddings():
@@ -23,9 +28,34 @@ else:
     with open("embeddings_model.pkl", "wb") as f:
         pickle.dump(embeddings, f)
 
+def load_pdf(data):
+    loader = DirectoryLoader(data, glob="*.pdf", loader_cls=PyPDFLoader)
+    documents = loader.load()
+    return documents
+
+extracted_data = None
+if path.exists("extracted_data.pkl"):
+    with open("extracted_data.pkl", "rb") as f:
+        extracted_data = pickle.load(f)
+else:
+    extracted_data = load_pdf("MedicalGPT/data/")
+    with open("extracted_data.pkl", "wb") as f:
+        pickle.dump(extracted_data, f)
+
+
+def text_split(extracted_data):
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size = 500, chunk_overlap = 20)
+    text_chunks = text_splitter.split_documents(extracted_data)
+    return text_chunks
+
+text_chunks = text_split(extracted_data)
+
+
+
+
 index_name = "rag-index1"
-api_key = "your_pinecone_api_key"
-genai_key = "your_openai_api_key"
+api_key = "c2c00468-cd40-424e-9058-33db0022085d"
+genai_key = "AIzaSyAlf4pr7okE_t9-xOgz7FK8kluNJq3YNuM"
 
 # Initialize Pinecone and AI Model
 pc = Pinecone(api_key=api_key, embeddings=embeddings)
@@ -79,8 +109,20 @@ class ConversationalAI:
 conversational_ai = ConversationalAI(api_key=api_key, embeddings=embeddings, index_name=index_name)
 
 @api_view(['POST'])
+#def get_response(request):
+#    user_id = request.data.get('user_id')
+#    query = request.data.get('query')
+#    response = conversational_ai.get_answer(user_id, query, model=model, top_k=10, template=template)
+#    return Response({"response": response})
 def get_response(request):
-    user_id = request.data.get('user_id')
-    query = request.data.get('query')
-    response = conversational_ai.get_answer(user_id, query, model=model, top_k=10, template=template)
-    return Response({"response": response})
+    try:
+        user_id = request.data.get('user_id')
+        query = request.data.get('query')
+
+        # Assuming this is where your AI processing happens
+        response = conversational_ai.get_answer(user_id, query, model=model, top_k=10, template=template)
+        return JsonResponse({"response": response})
+    
+    except Exception as e:
+        print(f"Error in get_response: {str(e)}")
+        return JsonResponse({"error": str(e)}, status=500)
