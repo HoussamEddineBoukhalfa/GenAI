@@ -25,8 +25,8 @@ In this project, I implemented the **Retrieval-Augmented Generation (RAG)** arch
 The user interface (UI) of ArabMedicalGPT was designed to provide a seamless experience for users. Below are screenshots of the key pages:
 
 ### Landing Page
-![Landing Page](/User Interface/src/assets/)
+![Landing Page](/User Interface/src/assets/UI_landing_page.png)
 
 ### Chat Page
-![Chat Page](/User Interface/src/assets/)
+![Chat Page](/User Interface/src/assets/UI_chat_page.png)
 
