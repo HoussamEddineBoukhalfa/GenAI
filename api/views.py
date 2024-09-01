@@ -54,22 +54,23 @@ text_chunks = text_split(extracted_data)
 
 
 index_name = "rag-index1"
-api_key = "c2c00468-cd40-424e-9058-33db0022085d"
-genai_key = "AIzaSyAlf4pr7okE_t9-xOgz7FK8kluNJq3YNuM"
+api_key = ""
+genai_key = ""
 
 # Initialize Pinecone and AI Model
 pc = Pinecone(api_key=api_key, embeddings=embeddings)
 genai.configure(api_key=genai_key)
 index = pc.Index(index_name)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-1.5-pro')
 
-template = "You are MedcialBOT your job is like a doctor you will" + \
+
+template = "You are ArabMedicalGPT an arabic medical assistant your job is like a doctor you will" + \
 " be given symptoms and try to identify" + \
 " the disease as accurately as possible," + \
 " given these details {0}." +\
 " \nUser prompt: {1}."+\
 " \nand here are the previous questions from the same User, consider them in answering this question if necessary: {2}."+\
-"If the curent user prompt is not related to medical diagnosis, ignore it."
+"If the curent user prompt is not related to medical diagnosis, ignore it. "
 
 
 class ConversationalAI:
@@ -90,13 +91,13 @@ class ConversationalAI:
         
         self.context = {}  # Dictionary to store conversation context for each user
 
-    def get_relevant(self, query, top_k=10):
+    def get_relevant(self, query, top_k=5):
         res = self.index.query(vector=embeddings.embed_query(query), top_k=top_k)
         indices = [int(match["id"]) - 1 for match in res.to_dict()["matches"]]
         chunks = [text_chunks[index].page_content for index in indices]
         return chunks
 
-    def get_answer(self, user_id, query, model=None, top_k=10, template=""):
+    def get_answer(self, user_id, query, model=None, top_k=5, template=""):
         context = self.context.get(user_id, [])
         print("context: ", context)
         query_translated = mt.translate(query, "en")
@@ -120,7 +121,7 @@ def get_response(request):
         query = request.data.get('query')
 
         # Assuming this is where your AI processing happens
-        response = conversational_ai.get_answer(user_id, query, model=model, top_k=10, template=template)
+        response = conversational_ai.get_answer(user_id, query, model=model, top_k=5, template=template)
         return JsonResponse({"response": response})
     
     except Exception as e:
