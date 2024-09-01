@@ -17,7 +17,7 @@ ArabMedicalGPT is an Arabic advanced language model for medical applications, le
 - React
 
 ## RAG Architecture
-In this project, I implemented the **Retrieval-Augmented Generation (RAG)** architecture, which enhances the model's ability to retrieve relevant documents and generate accurate, context-aware responses. This architecture is particularly useful in handling complex medical queries by providing precise information based on a vast knowledge base.
+In this project, We implemented the **Retrieval-Augmented Generation (RAG)** architecture, which enhances the model's ability to retrieve relevant documents and generate accurate, context-aware responses. This architecture is particularly useful in handling complex medical queries by providing precise information based on a vast knowledge base.
 
 ![RAG Architecture](Rag.png)
 
