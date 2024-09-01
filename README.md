@@ -19,14 +19,14 @@ ArabMedicalGPT is an Arabic advanced language model for medical applications, le
 ## RAG Architecture
 In this project, I implemented the **Retrieval-Augmented Generation (RAG)** architecture, which enhances the model's ability to retrieve relevant documents and generate accurate, context-aware responses. This architecture is particularly useful in handling complex medical queries by providing precise information based on a vast knowledge base.
 
-![RAG Architecture](./User Interface/src/assets/Rag.png)
+![RAG Architecture](Rag.png)
 
 ## UI Presentation
 The user interface (UI) of ArabMedicalGPT was designed to provide a seamless experience for users. Below are screenshots of the key pages:
 
 ### Landing Page
-![Landing Page](./User Interface/src/assets/UI_landing_page.png)
+![Landing Page](UI_landing_page.png)
 
 ### Chat Page
-![Chat Page](./User Interface/src/assets/UI_chat_page.png)
+![Chat Page](UI_chat_page.png)
 
