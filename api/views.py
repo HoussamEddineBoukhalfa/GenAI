@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -54,8 +52,8 @@ text_chunks = text_split(extracted_data)
 
 
 index_name = "rag-index1"
-api_key = ""
-genai_key = ""
+api_key = "c2c00468-cd40-424e-9058-33db0022085d"
+genai_key = "AIzaSyAlf4pr7okE_t9-xOgz7FK8kluNJq3YNuM"
 
 # Initialize Pinecone and AI Model
 pc = Pinecone(api_key=api_key, embeddings=embeddings)
@@ -69,7 +67,7 @@ template = "You are ArabMedicalGPT an arabic medical assistant your job is like 
 " the disease as accurately as possible," + \
 " given these details {0}." +\
 " \nUser prompt: {1}."+\
-" \nand here are the previous questions from the same User, consider them in answering this question if necessary: {2}."+\
+" \nand here are the previous questions from the same User, consider them in answering this question if needed : {2}."+\
 "If the curent user prompt is not related to medical diagnosis, ignore it. "
 
 
@@ -91,19 +89,26 @@ class ConversationalAI:
         
         self.context = {}  # Dictionary to store conversation context for each user
 
-    def get_relevant(self, query, top_k=5):
+    def get_relevant(self, query, top_k=2):
         res = self.index.query(vector=embeddings.embed_query(query), top_k=top_k)
         indices = [int(match["id"]) - 1 for match in res.to_dict()["matches"]]
         chunks = [text_chunks[index].page_content for index in indices]
         return chunks
 
-    def get_answer(self, user_id, query, model=None, top_k=5, template=""):
+    def get_answer(self, user_id, query, model=None, top_k=2, template=""):
         context = self.context.get(user_id, [])
         print("context: ", context)
         query_translated = mt.translate(query, "en")
         relevant_content = self.get_relevant(query_translated, top_k)
         input_text = template.format("\n".join(relevant_content), query_translated, "\n".join(context))
-        ans = model.generate_content(input_text)
+        ans = model.generate_content(
+    input_text,
+    generation_config=genai.types.GenerationConfig(
+        candidate_count=1,
+        max_output_tokens=300,
+        temperature=0.1,
+    ),
+)
         self.context[user_id] = [query_translated] + context
         return mt.translate(ans.text, "ar")
 
@@ -121,7 +126,7 @@ def get_response(request):
         query = request.data.get('query')
 
         # Assuming this is where your AI processing happens
-        response = conversational_ai.get_answer(user_id, query, model=model, top_k=5, template=template)
+        response = conversational_ai.get_answer(user_id, query, model=model, top_k=2, template=template)
         return JsonResponse({"response": response})
     
     except Exception as e:
